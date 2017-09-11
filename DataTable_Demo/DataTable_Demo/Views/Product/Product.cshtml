@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- add thids links for the error message-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/1.3.1/css/toastr.css" />
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/1.3.1/js/toastr.js"></script>
+
+
+@*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+<div class="w3-panel w3-animate-opacity">
+    <div class="w3-tag w3-jumbo">S</div>
+    <div class="w3-tag w3-jumbo">A</div>
+    <div class="w3-tag w3-jumbo">L</div>
+    <div class="w3-tag w3-jumbo">E</div>
+</div>
+
+
+
+<div class="w3-row-padding">
+     @foreach (var item in Model) {
+    <div class="w3-third">
+        <div class="w3-card">
+            <div class="w3-container w3-red">
+                <h1><b>@item.Name</b></h1>
+            </div>
+            <div class="w3-container w3-xlarge">
+                <p>
+                    @item.Name<br>
+                    <i><b>@item.Description</b></i><br>
+                    <span class="w3-xxlarge w3-text-red"><b>@item.Name</b></span>
+                </p>
+                <p>
+                    <del>$400</del> <span class="w3-tag w3-yellow">New!</span><br>
+                    Now only @item.Price !!!
+                </p>
+            </div>
+            <div class="w3-container w3-red">
+                <p class="w3-opacity">Contact: Bhavdip-9825891108</p>
+            </div>
+        </div>
+        <br />
+    </div>
+     }
+</div>*@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='http://fonts.googleapis.com/css?family=Work+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="~/Content/css/reset.css" rel="stylesheet" />
+
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <script src="~/Content/js/modernizr.js"></script>
+
+
+    <title>Document</title>
+</head>
+    <style>
+    .red_border {
+        border: 1px solid #e46262;
+    }
+     .LoadingDiv {
+            top: 0;
+            left: 0;
+            position: fixed;
+            opacity: 0.97;
+            z-index: 10000000;
+            background: Black;
+            height: 100%;
+            width: 100%;
+            margin: auto;
+        }
+    .dataTables_filter {
+        float:right;
+    }
+</style>
+<body>
+    <div id="dvLoader" class="LoadingDiv" style="display: none;">
+    <table style="height: 100%; margin: auto;">
+        <tr>
+            <td style="vertical-align: middle;">
+                <center>
+                        <img src="http://www.girlsgotit.org/images/ajax-loader.gif"  alt="Loading" />
+                    </center>
+            </td>
+        </tr>
+    </table>
+</div>
+    <header>
+        <h1>Quick Add to Cart</h1>
+    </header>
+
+    <a href="@Url.Action("Cart","Cart")" class="cd-cart">
+        <span>0</span>
+    </a>
+
+    <ul class="cd-gallery">
+
+        @foreach (var item in Model) {
+
+        <li>
+            <div class="cd-single-item">
+                
+                <a href="#0">
+                    <ul class="cd-slider-wrapper">
+                        <li>
+                            <img src="~/Content/img/thumb-1.jpg" alt="Preview image"></li>
+                        <li>
+                            <img src="~/Content/img/thumb-2.jpg" alt="Preview image"></li>
+                        <li class="selected">
+                            <img src="~/Content/img/thumb-1.jpg" alt="Preview image"></li>
+                    </ul>
+                </a>
+               
+                <div class="cd-customization">
+                  
+                    <div class="color selected-3" data-type="select">
+                        <ul>
+                            <li class="color-1">color-1</li>
+                            <li class="color-2">color-2</li>
+                            <li class="color-3 active">color-3</li>
+                        </ul>
+                    </div>
+
+                    <div class="size" data-type="select">
+                        <ul>
+                            <li class="small active">Small</li>
+                            <li class="medium">Medium</li>
+                            <li class="large">Large</li>
+                        </ul>
+                    </div>
+                   
+                    <button class="add-to-cart" onclick="AddToCart('@item.PID');">
+                        <em>Add to Cart</em>
+                        <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+                            <path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- .cd-customization -->
+
+                <button class="cd-customization-trigger">Customize</button>
+            </div>
+            <!-- .cd-single-item -->
+
+            <div class="cd-item-info">
+                <b><a href="#0">@item.Name</a></b>
+                <br /><span style="font-weight:normal;font-family:Arial;font-size:15px;color:gray">@item.Description</span>
+                <em>$@item.Price</em>
+            </div>
+            <!-- cd-item-info -->
+        </li>
+        }
+        
+    </ul>
+    <!-- cd-gallery -->
+    @*<script src="js/jquery-2.1.4.js"></script>*@
+   
+    <script src="~/Content/js/main.js"></script>
+    <!-- Resource jQuery -->
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+    });
+    function AddToCart(PID) {
+        var PID = PID
+        $('#dvLoader').show();
+        $.ajax({
+            url: '@Url.Action("AddToCart", "Product")',
+                type: 'POST',
+                data: JSON.stringify({ "PID": parseInt(PID) }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    $('#dvLoader').hide();
+
+                    if (result.Status == "True") {
+                        toastr.success(result.Message);
+                        clear();
+                        display();
+                    }
+                    else {
+                        toastr.success(result.Message);
+                        clear();
+                        display();
+
+                    }
+                }
+            });
+        }
+</script>
